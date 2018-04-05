@@ -158,6 +158,25 @@ func TestStaticDataMasteries(t *testing.T) {
 	}
 }
 
+func TestStaticDataMasteryByID(t *testing.T) {
+	client, mux, _, teardown := createTestServer()
+	defer teardown()
+
+	mux.HandleFunc("/lol/static-data/v3/masteries/123", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write(masteryJSON)
+	})
+
+	got, _, err := client.StaticData.MasteryByID(123)
+
+	if err != nil {
+		t.Errorf("StaticData.MasteryByID returned error: %v", err)
+	}
+	if want := wantMastery; !reflect.DeepEqual(got, want) {
+		t.Errorf("StaticData.MasteryByID = %+v, want %+v", got, want)
+	}
+}
+
 var (
 	staticChampionsJSON = []byte(`{
 		"type": "champion",
@@ -529,5 +548,29 @@ var (
 				Name: "Sorcery",
 			},
 		},
+	}
+
+	masteryJSON = []byte(`{
+		"description": [
+			"+0.8% Attack Speed",
+			"+1.6% Attack Speed",
+			"+2.4% Attack Speed",
+			"+3.2% Attack Speed",
+			"+4% Attack Speed"
+		],
+		"id": 6111,
+		"name": "Fury"
+	}`)
+
+	wantMastery = &MasteryDTO{
+		Description: []string{
+			"+0.8% Attack Speed",
+			"+1.6% Attack Speed",
+			"+2.4% Attack Speed",
+			"+3.2% Attack Speed",
+			"+4% Attack Speed",
+		},
+		ID:   6111,
+		Name: "Fury",
 	}
 )

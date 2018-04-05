@@ -598,3 +598,590 @@ func (s *StaticDataService) Masteries(opts ...StaticDataMasteriesOption) (*Maste
 
 	return m, resp, nil
 }
+
+// StaticDataMasteryOptions specifies the optional parameters to the Static Data mastery service method.
+type StaticDataMasteryOptions struct {
+	MasteryData []string `url:"masteryData"`
+	Locale      string   `url:"locale"`
+	Version     string   `url:"version"`
+	Tags        []string `url:"tags"`
+}
+
+// StaticDataMasteryOption is a function which modifies the StaticDataMasteryOptions.
+type StaticDataMasteryOption func(*StaticDataMasteryOptions)
+
+// MasteryByID retrieves a mastery by ID.
+func (s *StaticDataService) MasteryByID(masteryID int64, opts ...StaticDataMasteryOption) (*MasteryDTO, *http.Response, error) {
+	options := &StaticDataMasteryOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u := "lol/static-data/v3/masteries/" + strconv.FormatInt(masteryID, 10)
+	u, err := addOptions(u, options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	m := &MasteryDTO{}
+	resp, err := s.client.Do(req, m)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return m, resp, nil
+}
+
+// ProfileIconDataDTO contains profile icon data.
+type ProfileIconDataDTO struct {
+	Data    map[string]ProfileIconDetailsDTO `json:"data"`
+	Version string                           `json:"version"`
+	Type    string                           `json:"type"`
+}
+
+// ProfileIconDetailsDTO contains profile icon details data.
+type ProfileIconDetailsDTO struct {
+	Image ImageDTO `json:"image"`
+	ID    int64    `json:"id"`
+}
+
+// StaticDataProfileIconsOptions specifies the optional parameters to the Static Data profile icons service method.
+type StaticDataProfileIconsOptions struct {
+	Locale  string `url:"locale"`
+	Version string `url:"version"`
+}
+
+// StaticDataProfileIconsOption is a function which modifies the StaticDataProfileIconsOptions.
+type StaticDataProfileIconsOption func(*StaticDataProfileIconsOptions)
+
+// ProfileIcons retrieves profile icons.
+func (s *StaticDataService) ProfileIcons(opts ...StaticDataProfileIconsOption) (*ProfileIconDataDTO, *http.Response, error) {
+	options := &StaticDataProfileIconsOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/profile-icons", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	p := &ProfileIconDataDTO{}
+	resp, err := s.client.Do(req, p)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return p, resp, nil
+}
+
+// RealmDTO contains realm data.
+type RealmDTO struct {
+	Lg             string            `json:"lg"`
+	Dd             string            `json:"dd"`
+	L              string            `json:"l"`
+	N              map[string]string `json:"n"`
+	ProfileIconMax int               `json:"profileiconmax"`
+	Store          string            `json:"store"`
+	V              string            `json:"v"`
+	CDN            string            `json:"cdn"`
+	CSS            string            `json:"css"`
+}
+
+// Realms retrieves realms data.
+func (s *StaticDataService) Realms() (*RealmDTO, *http.Response, error) {
+	req, err := s.client.NewRequest("lol/static-data/v3/realms")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	r := &RealmDTO{}
+	resp, err := s.client.Do(req, r)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return r, resp, nil
+}
+
+// ReforgedRunePathDTO contains reforged rune path data.
+type ReforgedRunePathDTO struct {
+	Slots []ReforgedRuneSlotDTO `json:"slots"`
+	Icon  string                `json:"icon"`
+	ID    int                   `json:"id"`
+	Key   string                `json:"key"`
+	Name  string                `json:"name"`
+}
+
+// ReforgedRuneSlotDTO contains reforged rune slot data.
+type ReforgedRuneSlotDTO struct {
+	Runes []ReforgedRuneDTO `json:"runes"`
+}
+
+// ReforgedRuneDTO contains reforged rune data.
+type ReforgedRuneDTO struct {
+	RunePathName string `json:"runePathName"`
+	RunePathID   int    `json:"runePathId"`
+	Name         string `json:"name"`
+	ID           int    `json:"id"`
+	Key          string `json:"key"`
+	ShortDesc    string `json:"shortDesc"`
+	LongDesc     string `json:"longDesc"`
+	Icon         string `json:"icon"`
+}
+
+// StaticDataReforgedRuneOptions specifies the optional parameters to the Static Data reforged runes service method.
+type StaticDataReforgedRuneOptions struct {
+	Version string `url:"version"`
+	Locale  string `url:"locale"`
+}
+
+// StaticDataReforgedRuneOption is a function which modifies the StaticDataReforgedRuneOptions.
+type StaticDataReforgedRuneOption func(*StaticDataReforgedRuneOptions)
+
+// ReforgedRunePaths retrieves reforged rune paths.
+func (s *StaticDataService) ReforgedRunePaths(opts ...StaticDataReforgedRuneOption) ([]ReforgedRunePathDTO, *http.Response, error) {
+	options := &StaticDataReforgedRuneOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/reforged-rune-paths", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	p := []ReforgedRunePathDTO{}
+	resp, err := s.client.Do(req, &p)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return p, resp, nil
+}
+
+// ReforgedRunePathByID retrieves a reforged rune path by ID.
+func (s *StaticDataService) ReforgedRunePathByID(pathID int, opts ...StaticDataReforgedRuneOption) (*ReforgedRunePathDTO, *http.Response, error) {
+	options := &StaticDataReforgedRuneOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u := "lol/static-data/v3/reforged-rune-paths/" + strconv.Itoa(pathID)
+	u, err := addOptions(u, options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	p := &ReforgedRunePathDTO{}
+	resp, err := s.client.Do(req, p)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return p, resp, nil
+}
+
+// ReforgedRunes retrieves reforged runes.
+func (s *StaticDataService) ReforgedRunes(opts ...StaticDataReforgedRuneOption) ([]ReforgedRuneDTO, *http.Response, error) {
+	options := &StaticDataReforgedRuneOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/reforged-runes", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	r := []ReforgedRuneDTO{}
+	resp, err := s.client.Do(req, &r)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return r, resp, nil
+}
+
+// ReforgedRuneByID retrieves a reforged rune by ID.
+func (s *StaticDataService) ReforgedRuneByID(runeID int, opts ...StaticDataReforgedRuneOption) (*ReforgedRuneDTO, *http.Response, error) {
+	options := &StaticDataReforgedRuneOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u := "lol/static-data/v3/reforged-runes/" + strconv.Itoa(runeID)
+	u, err := addOptions(u, options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	r := &ReforgedRuneDTO{}
+	resp, err := s.client.Do(req, r)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return r, resp, nil
+}
+
+// RuneListDTO contains rune list data.
+type RuneListDTO struct {
+	Data    map[string]RuneDTO `json:"data"`
+	Version string             `json:"version"`
+	Type    string             `json:"type"`
+}
+
+// RuneDTO contains rune data.
+type RuneDTO struct {
+	Stats                RuneStatsDTO `json:"stats"`
+	Name                 string       `json:"name"`
+	Tags                 []string     `json:"tags"`
+	Image                ImageDTO     `json:"image"`
+	SanitizedDescription string       `json:"sanitizedDescription"`
+	Rune                 MetaDataDTO  `json:"rune"`
+	ID                   int          `json:"id"`
+	Description          string       `json:"description"`
+}
+
+// RuneStatsDTO contains stats for runes.
+type RuneStatsDTO struct {
+	PercentTimeDeadModPerLevel         int64
+	PercentArmorPenetrationModPerLevel int64
+	PercentCritDamageMod               int64
+	PercentSpellBlockMod               int64
+	PercentHPRegenMod                  int64
+	PercentMovementSpeedMod            int64
+	FlatSpellBlockMod                  int64
+	FlatEnergyRegenModPerLevel         int64
+	FlatEnergyPoolMod                  int64
+	FlatMagicPenetrationModPerLevel    int64
+	PercentLifeStealMod                int64
+	FlatMPPoolMod                      int64
+	PercentCooldownMod                 int64
+	PercentMagicPenetrationMod         int64
+	FlatArmorPenetrationModPerLevel    int64
+	FlatMovementSpeedMod               int64
+	FlatTimeDeadModPerLevel            int64
+	FlatArmorModPerLevel               int64
+	PercentAttackSpeedMod              int64
+	FlatDodgeModPerLevel               int64
+	PercentMagicDamageMod              int64
+	PercentBlockMod                    int64
+	FlatDodgeMod                       int64
+	FlatEnergyRegenMod                 int64
+	FlatHPModPerLevel                  int64
+	PercentAttackSpeedModPerLevel      int64
+	PercentSpellVampMod                int64
+	FlatMPRegenMod                     int64
+	PercentHPPoolMod                   int64
+	PercentDodgeMod                    int64
+	FlatAttackSpeedMod                 int64
+	FlatArmorMod                       int64
+	FlatMagicDamageModPerLevel         int64
+	FlatHPRegenMod                     int64
+	PercentPhysicalDamageMod           int64
+	FlatCritChanceModPerLevel          int64
+	FlatSpellBlockModPerLevel          int64
+	PercentTimeDeadMod                 int64
+	FlatBlockMod                       int64
+	PercentMPPoolMod                   int64
+	FlatMagicDamageMod                 int64
+	PercentMPRegenMod                  int64
+	PercentMovementSpeedModPerLevel    int64
+	PercentCooldownModPerLevel         int64
+	FlatMPModPerLevel                  int64
+	FlatEnergyModPerLevel              int64
+	FlatPhysicalDamageMod              int64
+	FlatHPRegenModPerLevel             int64
+	FlatCritDamageMod                  int64
+	PercentArmorMod                    int64
+	FlatMagicPenetrationMod            int64
+	PercentCritChanceMod               int64
+	FlatPhysicalDamageModPerLevel      int64
+	PercentArmorPenetrationMod         int64
+	PercentEXPBonus                    int64
+	FlatMPRegenModPerLevel             int64
+	PercentMagicPenetrationModPerLevel int64
+	FlatTimeDeadMod                    int64
+	FlatMovementSpeedModPerLevel       int64
+	FlatGoldPer10Mod                   int64
+	FlatArmorPenetrationMod            int64
+	FlatCritDamageModPerLevel          int64
+	FlatHPPoolMod                      int64
+	FlatCritChanceMod                  int64
+	FlatEXPBonus                       int64
+}
+
+// MetaDataDTO contains meta data.
+type MetaDataDTO struct {
+	Tier   string `json:"tier"`
+	Type   string `json:"type"`
+	IsRune bool   `json:"isRune"`
+}
+
+// StaticDataRuneListOptions specifies the optional parameters for the Static Data rune service method.
+type StaticDataRuneListOptions struct {
+	Locale       string   `url:"locale"`
+	Version      string   `url:"version"`
+	RuneListData []string `url:"runeListData"`
+	Tags         []string `url:"tags"`
+}
+
+// StaticDataRuneListOption is a function which modifies the StaticDataRuneListOptions.
+type StaticDataRuneListOption func(*StaticDataRuneListOptions)
+
+// Runes retrieves the list of runes.
+func (s *StaticDataService) Runes(opts ...StaticDataRuneListOption) (*RuneListDTO, *http.Response, error) {
+	options := &StaticDataRuneListOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/runes", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	r := &RuneListDTO{}
+	resp, err := s.client.Do(req, r)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return r, resp, nil
+}
+
+// StaticDataRuneOptions specifies the optional parameters for the Static Data rune service method.
+type StaticDataRuneOptions struct {
+	Locale   string   `url:"locale"`
+	Version  string   `url:"version"`
+	RuneData []string `url:"runeData"`
+	Tags     []string `url:"tags"`
+}
+
+// StaticDataRuneOption is a function which modifies the StaticDataRuneOptions.
+type StaticDataRuneOption func(*StaticDataRuneOptions)
+
+// RuneByID retrieves a rune by ID.
+func (s *StaticDataService) RuneByID(runeID int64, opts ...StaticDataRuneOption) (*RuneDTO, *http.Response, error) {
+	options := &StaticDataRuneOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u := "lol/static-data/v3/runes/" + strconv.FormatInt(runeID, 10)
+	u, err := addOptions(u, options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	r := &RuneDTO{}
+	resp, err := s.client.Do(req, r)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return r, resp, nil
+}
+
+// SummonerSpellListDTO contains summoner spell list data.
+type SummonerSpellListDTO struct {
+	Data    map[string]SummonerSpellDTO `json:"data"`
+	Version string                      `json:"version"`
+	Type    string                      `json:"type"`
+}
+
+// SummonerSpellDTO contains summoner spell data.
+type SummonerSpellDTO struct {
+	Vars                 []SpellVarsDTO `json:"vars"`
+	Image                ImageDTO       `json:"image"`
+	CostBurn             string         `json:"costBurn"`
+	Cooldown             []int64        `json:"cooldown"`
+	EffectBurn           []string       `json:"effectBurn"`
+	ID                   int            `json:"id"`
+	CooldownBurn         string         `json:"cooldownBurn"`
+	Tooltip              string         `json:"tooltip"`
+	MaxRank              int            `json:"maxrank"`
+	RangeBurn            string         `json:"rangeBurn"`
+	Description          string         `json:"description"`
+	Effect               [][]int64      `json:"effect"`
+	Key                  string         `json:"key"`
+	LevelTip             LevelTipDTO    `json:"leveltip"`
+	Modes                []string       `json:"modes"`
+	Resource             string         `json:"resource"`
+	Name                 string         `json:"name"`
+	CostType             string         `json:"costType"`
+	SanitizedDescription string         `json:"sanitizedDescription"`
+	SanitizedTooltip     string         `json:"sanitizedTooltip"`
+	Range                interface{}    `json:"range"` // This field is either a List of Integer or the String 'self' for spells that target one's own champion.
+	Cost                 []int          `json:"cost"`
+	SummonerLevel        int            `json:"summonerLevel"`
+}
+
+// StaticDataSpellListOptions specifies the optional parameters for the Static Data spell list service method.
+type StaticDataSpellListOptions struct {
+	Locale        string   `url:"locale"`
+	Version       string   `url:"version"`
+	SpellListData []string `url:"spellListData"`
+	DataByID      bool     `url:"dataById"`
+	Tags          []string `url:"tags"`
+}
+
+// StaticDataSpellListOption is a function which modifies the StaticDataSpellListOptions.
+type StaticDataSpellListOption func(*StaticDataSpellListOptions)
+
+// SummonerSpells retrieves summoner spell list.
+func (s *StaticDataService) SummonerSpells(opts ...StaticDataSpellListOption) (*SummonerSpellListDTO, *http.Response, error) {
+	options := &StaticDataSpellListOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/summoner-spells", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	ss := &SummonerSpellListDTO{}
+	resp, err := s.client.Do(req, ss)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return ss, resp, nil
+}
+
+// StaticDataSpellOptions specifies the optional parameters for the Static Data spell  service method.
+type StaticDataSpellOptions struct {
+	Locale    string   `url:"locale"`
+	Version   string   `url:"version"`
+	SpellData []string `url:"spellData"`
+	DataByID  bool     `url:"dataById"`
+	Tags      []string `url:"tags"`
+}
+
+// StaticDataSpellOption is a function which modifies the StaticDataSpellOptions.
+type StaticDataSpellOption func(*StaticDataSpellOptions)
+
+// SummonerSpellByID retrieves a summoner spell by ID.
+func (s *StaticDataService) SummonerSpellByID(summonerSpellID int64, opts ...StaticDataSpellOption) (*SummonerSpellDTO, *http.Response, error) {
+	options := &StaticDataSpellOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u := "lol/static-data/v3/summoner-spells/" + strconv.FormatInt(summonerSpellID, 10)
+	u, err := addOptions(u, options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	ss := &SummonerSpellDTO{}
+	resp, err := s.client.Do(req, ss)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return ss, resp, nil
+}
+
+// TarballLinksOptions specifies the optional parameters for the Static Data tarball links service method.
+type TarballLinksOptions struct {
+	Version string `url:"version"`
+}
+
+// TarballLinksOption is a function which modifies the TarballLinksOptions.
+type TarballLinksOption func(*TarballLinksOptions)
+
+// TarballLinks retrieves full tarball link.
+func (s *StaticDataService) TarballLinks(opts ...TarballLinksOption) (*string, *http.Response, error) {
+	options := &TarballLinksOptions{}
+	for _, o := range opts {
+		o(options)
+	}
+
+	u, err := addOptions("lol/static-data/v3/tarball-links", options)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest(u)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var tl *string
+	resp, err := s.client.Do(req, tl)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return tl, resp, nil
+}
+
+// Versions retrieves a list of valid versions.
+func (s *StaticDataService) Versions() ([]string, *http.Response, error) {
+	req, err := s.client.NewRequest("lol/static-data/v3/versions")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var v []string
+	resp, err := s.client.Do(req, &v)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return v, resp, nil
+}
