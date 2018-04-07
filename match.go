@@ -108,7 +108,7 @@ type ParticipantStatsDTO struct {
 	LongestTimeSpentLiving          int   `json:"longestTimeSpentLiving"`
 	WardsKilled                     int   `json:"wardsKilled"`
 	FirstTowerAssist                bool  `json:"firstTowerAssist"`
-	FirstTowerKill                  bool  `json:"firstTowerAssist"`
+	FirstTowerKill                  bool  `json:"firstTowerKill"`
 	Item2                           int   `json:"item2"`
 	Item3                           int   `json:"item3"`
 	Item0                           int   `json:"item0"`
