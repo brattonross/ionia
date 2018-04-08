@@ -1,6 +1,6 @@
 # ionia #
 
-[![GoDoc](https://godoc.org/github.com/brattonross/ionia?status.svg)](https://godoc.org/github.com/brattonross/ionia) [Build Status](https://travis-ci.org/brattonross/ionia.svg?branch=master)](https://travis-ci.org/brattonross/ionia) [![Coverage Status](https://coveralls.io/repos/github/brattonross/ionia/badge.svg?branch=master)](https://coveralls.io/github/brattonross/ionia?branch=master)
+[![GoDoc](https://godoc.org/github.com/brattonross/ionia?status.svg)](https://godoc.org/github.com/brattonross/ionia) [![Build Status](https://travis-ci.org/brattonross/ionia.svg?branch=master)](https://travis-ci.org/brattonross/ionia) [![Coverage Status](https://coveralls.io/repos/github/brattonross/ionia/badge.svg?branch=master)](https://coveralls.io/github/brattonross/ionia?branch=master)
 
 ionia is a Go client library for accessing the [Riot API](https://developer.riotgames.com/)
 
