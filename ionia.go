@@ -51,6 +51,13 @@ type Client struct {
 	Champion        *ChampionService
 	League          *LeagueService
 	StaticData      *StaticDataService
+	Status          *StatusService
+	Match           *MatchService
+	Spectator       *SpectatorService
+	Summoner        *SummonerService
+	ThirdPartyCode  *ThirdPartyCodeService
+	TournamentStub  *TournamentStubService
+	Tournament      *TournamentService
 }
 
 type service struct {
@@ -90,6 +97,13 @@ func NewClient(opts ...ClientOption) *Client {
 	c.Champion = (*ChampionService)(&c.common)
 	c.League = (*LeagueService)(&c.common)
 	c.StaticData = (*StaticDataService)(&c.common)
+	c.Status = (*StatusService)(&c.common)
+	c.Match = (*MatchService)(&c.common)
+	c.Spectator = (*SpectatorService)(&c.common)
+	c.Summoner = (*SummonerService)(&c.common)
+	c.ThirdPartyCode = (*ThirdPartyCodeService)(&c.common)
+	c.TournamentStub = (*TournamentStubService)(&c.common)
+	c.Tournament = (*TournamentService)(&c.common)
 
 	for _, opt := range opts {
 		opt(c)
