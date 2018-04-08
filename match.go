@@ -189,7 +189,7 @@ type MatchMasteryDTO struct {
 
 // MatchByID retrieves match data by ID.
 func (m *MatchService) MatchByID(matchID int64) (*MatchDTO, *http.Response, error) {
-	req, err := m.client.NewRequest("lol/match/v3/matches/" + strconv.FormatInt(matchID, 10))
+	req, err := m.client.NewRequest(http.MethodGet, "lol/match/v3/matches/"+strconv.FormatInt(matchID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -282,7 +282,7 @@ func (m *MatchService) MatchesByAccountID(accountID int64, opts ...MatchByAccoun
 		return nil, nil, err
 	}
 
-	req, err := m.client.NewRequest(u)
+	req, err := m.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -298,7 +298,7 @@ func (m *MatchService) MatchesByAccountID(accountID int64, opts ...MatchByAccoun
 
 // RecentMatches retrieves the last 20 matches played on a given account ID.
 func (m *MatchService) RecentMatches(accountID int64) (*MatchlistDTO, *http.Response, error) {
-	req, err := m.client.NewRequest(fmt.Sprintf("lol/match/v3/matchlists/by-account/%d/recent/", accountID))
+	req, err := m.client.NewRequest(http.MethodGet, fmt.Sprintf("lol/match/v3/matchlists/by-account/%d/recent/", accountID), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -379,7 +379,7 @@ type MatchEventDTO struct {
 
 // MatchTimelineByID retrieves a match timeline by match ID.
 func (m *MatchService) MatchTimelineByID(matchID int64) (*MatchTimelineDTO, *http.Response, error) {
-	req, err := m.client.NewRequest("lol/match/v3/timelines/by-match/" + strconv.FormatInt(matchID, 10))
+	req, err := m.client.NewRequest(http.MethodGet, "lol/match/v3/timelines/by-match/"+strconv.FormatInt(matchID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -395,7 +395,7 @@ func (m *MatchService) MatchTimelineByID(matchID int64) (*MatchTimelineDTO, *htt
 
 // MatchIDsByTournamentCode retrieves match IDs for the given tournament code.
 func (m *MatchService) MatchIDsByTournamentCode(tournamentCode string) ([]int64, *http.Response, error) {
-	req, err := m.client.NewRequest(fmt.Sprintf("lol/match/v3/matches/by-tournament-code/%s/ids", tournamentCode))
+	req, err := m.client.NewRequest(http.MethodGet, fmt.Sprintf("lol/match/v3/matches/by-tournament-code/%s/ids", tournamentCode), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -412,7 +412,7 @@ func (m *MatchService) MatchIDsByTournamentCode(tournamentCode string) ([]int64,
 // MatchByIDAndTournamentCode retrieves a match by ID and tournament code.
 func (m *MatchService) MatchByIDAndTournamentCode(matchID int64, tournamentCode string) (*MatchDTO, *http.Response, error) {
 	u := fmt.Sprintf("lol/match/v3/matches/%d/by-tournament-code/%s", matchID, tournamentCode)
-	req, err := m.client.NewRequest(u)
+	req, err := m.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -21,7 +21,7 @@ type SummonerDTO struct {
 
 // ByAccountID retrieves a summoner by account ID.
 func (s *SummonerService) ByAccountID(accountID int64) (*SummonerDTO, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/summoner/v3/summoners/by-account/" + strconv.FormatInt(accountID, 10))
+	req, err := s.client.NewRequest(http.MethodGet, "lol/summoner/v3/summoners/by-account/"+strconv.FormatInt(accountID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -37,7 +37,7 @@ func (s *SummonerService) ByAccountID(accountID int64) (*SummonerDTO, *http.Resp
 
 // BySummonerName retrieves a summoner by summoner name.
 func (s *SummonerService) BySummonerName(summonerName string) (*SummonerDTO, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/summoner/v3/summoners/by-name/" + summonerName)
+	req, err := s.client.NewRequest(http.MethodGet, "lol/summoner/v3/summoners/by-name/"+summonerName, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -53,7 +53,7 @@ func (s *SummonerService) BySummonerName(summonerName string) (*SummonerDTO, *ht
 
 // BySummonerID retrives a summoner by summoner ID.
 func (s *SummonerService) BySummonerID(summonerID int64) (*SummonerDTO, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/summoner/v3/summoners/" + strconv.FormatInt(summonerID, 10))
+	req, err := s.client.NewRequest(http.MethodGet, "lol/summoner/v3/summoners/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}

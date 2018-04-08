@@ -65,7 +65,7 @@ type Perks struct {
 
 // CurrentGame retrieves the current game information for the given summoner ID.
 func (s *SpectatorService) CurrentGame(summonerID int64) (*CurrentGameInfo, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/spectator/v3/active-games/by-summoner/" + strconv.FormatInt(summonerID, 10))
+	req, err := s.client.NewRequest(http.MethodGet, "lol/spectator/v3/active-games/by-summoner/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -113,7 +113,7 @@ type Participant struct {
 
 // FeaturedGames retrieves a list of featured games.
 func (s *SpectatorService) FeaturedGames() (*FeaturedGames, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/spectator/v3/featured-games")
+	req, err := s.client.NewRequest(http.MethodGet, "lol/spectator/v3/featured-games", nil)
 	if err != nil {
 		return nil, nil, err
 	}

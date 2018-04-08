@@ -43,7 +43,7 @@ type MiniSeriesDTO struct {
 
 // ChallengerLeagueByQueue gets the challenger league information for the given queue.
 func (l *LeagueService) ChallengerLeagueByQueue(queue string) (*LeagueListDTO, *http.Response, error) {
-	req, err := l.client.NewRequest("lol/league/v3/challengerleagues/by-queue/" + queue)
+	req, err := l.client.NewRequest(http.MethodGet, "lol/league/v3/challengerleagues/by-queue/"+queue, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -61,7 +61,7 @@ func (l *LeagueService) ChallengerLeagueByQueue(queue string) (*LeagueListDTO, *
 //
 // WARNING: Consistently looking up leagues that don't exist will result in a blacklist.
 func (l *LeagueService) ByLeagueID(leagueID string) (*LeagueListDTO, *http.Response, error) {
-	req, err := l.client.NewRequest("lol/league/v3/leagues/" + leagueID)
+	req, err := l.client.NewRequest(http.MethodGet, "lol/league/v3/leagues/"+leagueID, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -77,7 +77,7 @@ func (l *LeagueService) ByLeagueID(leagueID string) (*LeagueListDTO, *http.Respo
 
 // MasterLeagueByQueue gets the master league information for the given queue.
 func (l *LeagueService) MasterLeagueByQueue(queue string) (*LeagueListDTO, *http.Response, error) {
-	req, err := l.client.NewRequest("lol/league/v3/masterleagues/by-queue/" + queue)
+	req, err := l.client.NewRequest(http.MethodGet, "lol/league/v3/masterleagues/by-queue/"+queue, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -112,7 +112,7 @@ type LeaguePositionDTO struct {
 
 // PositionsBySummonerID gets league positions in all queues for the given summoner ID.
 func (l *LeagueService) PositionsBySummonerID(summonerID int64) ([]LeaguePositionDTO, *http.Response, error) {
-	req, err := l.client.NewRequest("lol/league/v3/positions/by-summoner/" + strconv.FormatInt(summonerID, 10))
+	req, err := l.client.NewRequest(http.MethodGet, "lol/league/v3/positions/by-summoner/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}

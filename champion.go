@@ -26,7 +26,7 @@ type ChampionDTO struct {
 
 // All lists all of the currently available champions.
 func (c *ChampionService) All() (*ChampionListDTO, *http.Response, error) {
-	req, err := c.client.NewRequest("lol/platform/v3/champions")
+	req, err := c.client.NewRequest(http.MethodGet, "lol/platform/v3/champions", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -42,7 +42,7 @@ func (c *ChampionService) All() (*ChampionListDTO, *http.Response, error) {
 
 // ByID retrieves champion information by ID.
 func (c *ChampionService) ByID(id int) (*ChampionDTO, *http.Response, error) {
-	req, err := c.client.NewRequest("lol/platform/v3/champions/" + strconv.Itoa(id))
+	req, err := c.client.NewRequest(http.MethodGet, "lol/platform/v3/champions/"+strconv.Itoa(id), nil)
 	if err != nil {
 		return nil, nil, err
 	}

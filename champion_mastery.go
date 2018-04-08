@@ -25,7 +25,7 @@ type ChampionMasteryDTO struct {
 
 // MasteryBySummonerID gets all champion mastery entries sorted by number of champion points in descending order.
 func (c *ChampionMasteryService) MasteryBySummonerID(summonerID int64) ([]ChampionMasteryDTO, *http.Response, error) {
-	req, err := c.client.NewRequest("lol/champion-mastery/v3/champion-masteries/by-summoner/" + strconv.FormatInt(summonerID, 10))
+	req, err := c.client.NewRequest(http.MethodGet, "lol/champion-mastery/v3/champion-masteries/by-summoner/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,7 +41,7 @@ func (c *ChampionMasteryService) MasteryBySummonerID(summonerID int64) ([]Champi
 
 // BySummonerAndChampionID gets a champion mastery for the given summoner ID and champion ID combination.
 func (c *ChampionMasteryService) BySummonerAndChampionID(summonerID, championID int64) (*ChampionMasteryDTO, *http.Response, error) {
-	req, err := c.client.NewRequest(fmt.Sprintf("lol/champion-mastery/v3/champion-masteries/by-summoner/%d/by-champion/%d", summonerID, championID))
+	req, err := c.client.NewRequest(http.MethodGet, fmt.Sprintf("lol/champion-mastery/v3/champion-masteries/by-summoner/%d/by-champion/%d", summonerID, championID), nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -58,7 +58,7 @@ func (c *ChampionMasteryService) BySummonerAndChampionID(summonerID, championID 
 // ScoreBySummonerID gets a summoner's total champion mastery score by ID.
 // The score is the sum of all individual champion mastery levels.
 func (c *ChampionMasteryService) ScoreBySummonerID(summonerID int64) (int, *http.Response, error) {
-	req, err := c.client.NewRequest("lol/champion-mastery/v3/scores/by-summoner/" + strconv.FormatInt(summonerID, 10))
+	req, err := c.client.NewRequest(http.MethodGet, "lol/champion-mastery/v3/scores/by-summoner/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return 0, nil, err
 	}

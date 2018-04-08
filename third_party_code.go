@@ -11,7 +11,7 @@ type ThirdPartyCodeService service
 
 // BySummonerID retrieves third party code for a given summoner ID.
 func (t *ThirdPartyCodeService) BySummonerID(summonerID int64) (*string, *http.Response, error) {
-	req, err := t.client.NewRequest("lol/platform/v3/third-party-code/by-summoner/" + strconv.FormatInt(summonerID, 10))
+	req, err := t.client.NewRequest(http.MethodGet, "lol/platform/v3/third-party-code/by-summoner/"+strconv.FormatInt(summonerID, 10), nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -63,7 +63,7 @@ func TestNewRequest(t *testing.T) {
 	apiKey := "testing"
 	c := NewClient(WithAPIKey(apiKey))
 
-	req, err := c.NewRequest("https://example.com/test/")
+	req, err := c.NewRequest(http.MethodGet, "https://example.com/test/", nil)
 	if err != nil {
 		t.Fatalf("NewRequest returned unexpected error: %v", err)
 	}
@@ -88,7 +88,7 @@ func TestNewRequest_ErrorForNoTrailingSlash(t *testing.T) {
 			t.Fatalf("url.Parse returned unexpected error: %v.", err)
 		}
 		c.BaseURL = u
-		if _, err := c.NewRequest("test"); tc.wantError && err == nil {
+		if _, err := c.NewRequest(http.MethodGet, "test", nil); tc.wantError && err == nil {
 			t.Fatalf("expected error to be returned")
 		} else if !tc.wantError && err != nil {
 			t.Fatalf("NewRequest returned unexpected error: %v", err)
@@ -108,7 +108,7 @@ func TestDo(t *testing.T) {
 		fmt.Fprint(w, `{ "test": "test string" }`)
 	})
 
-	req, _ := client.NewRequest(".")
+	req, _ := client.NewRequest(http.MethodGet, ".", nil)
 	t.Logf("created request %v", req)
 	body := &test{}
 
@@ -130,7 +130,7 @@ func TestDo_HTTPError(t *testing.T) {
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 	})
 
-	req, _ := client.NewRequest(".")
+	req, _ := client.NewRequest(http.MethodGet, ".", nil)
 	resp, err := client.Do(req, nil)
 
 	if err == nil {

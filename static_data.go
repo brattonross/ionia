@@ -203,7 +203,7 @@ func (s *StaticDataService) Champions(opts ...StaticDataChampionsOption) (*Stati
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -229,7 +229,7 @@ func (s *StaticDataService) ChampionByID(championID int64, opts ...StaticDataCha
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -373,7 +373,7 @@ func (s *StaticDataService) Items(opts ...StaticDataItemsOption) (*ItemListDTO, 
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -399,7 +399,7 @@ func (s *StaticDataService) ItemByID(itemID int64, opts ...StaticDataItemsOption
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -441,7 +441,7 @@ func (s *StaticDataService) LanguageStrings(opts ...StaticDataLanguageStringsOpt
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -457,7 +457,7 @@ func (s *StaticDataService) LanguageStrings(opts ...StaticDataLanguageStringsOpt
 
 // Languages retrieves supported languages data.
 func (s *StaticDataService) Languages() ([]string, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/static-data/v3/languages")
+	req, err := s.client.NewRequest(http.MethodGet, "lol/static-data/v3/languages", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -507,7 +507,7 @@ func (s *StaticDataService) Maps(opts ...StaticDataMapsOption) (*MapDataDTO, *ht
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -585,7 +585,7 @@ func (s *StaticDataService) Masteries(opts ...StaticDataMasteriesOption) (*Maste
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -623,7 +623,7 @@ func (s *StaticDataService) MasteryByID(masteryID int64, opts ...StaticDataMaste
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -671,7 +671,7 @@ func (s *StaticDataService) ProfileIcons(opts ...StaticDataProfileIconsOption) (
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -700,7 +700,7 @@ type RealmDTO struct {
 
 // Realms retrieves realms data.
 func (s *StaticDataService) Realms() (*RealmDTO, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/static-data/v3/realms")
+	req, err := s.client.NewRequest(http.MethodGet, "lol/static-data/v3/realms", nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -761,7 +761,7 @@ func (s *StaticDataService) ReforgedRunePaths(opts ...StaticDataReforgedRuneOpti
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -788,7 +788,7 @@ func (s *StaticDataService) ReforgedRunePathByID(pathID int, opts ...StaticDataR
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -814,7 +814,7 @@ func (s *StaticDataService) ReforgedRunes(opts ...StaticDataReforgedRuneOption) 
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -841,7 +841,7 @@ func (s *StaticDataService) ReforgedRuneByID(runeID int, opts ...StaticDataRefor
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -973,7 +973,7 @@ func (s *StaticDataService) Runes(opts ...StaticDataRuneListOption) (*RuneListDT
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1011,7 +1011,7 @@ func (s *StaticDataService) RuneByID(runeID int64, opts ...StaticDataRuneOption)
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1083,7 +1083,7 @@ func (s *StaticDataService) SummonerSpells(opts ...StaticDataSpellListOption) (*
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1122,7 +1122,7 @@ func (s *StaticDataService) SummonerSpellByID(summonerSpellID int64, opts ...Sta
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1156,7 +1156,7 @@ func (s *StaticDataService) TarballLinks(opts ...TarballLinksOption) (*string, *
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest(u)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1172,7 +1172,7 @@ func (s *StaticDataService) TarballLinks(opts ...TarballLinksOption) (*string, *
 
 // Versions retrieves a list of valid versions.
 func (s *StaticDataService) Versions() ([]string, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/static-data/v3/versions")
+	req, err := s.client.NewRequest(http.MethodGet, "lol/static-data/v3/versions", nil)
 	if err != nil {
 		return nil, nil, err
 	}

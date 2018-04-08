@@ -52,7 +52,7 @@ type Translation struct {
 
 // ShardData retrieves the League of Legends status for the given shard.
 func (s *StatusService) ShardData() (*ShardStatus, *http.Response, error) {
-	req, err := s.client.NewRequest("lol/status/v3/shard-data")
+	req, err := s.client.NewRequest(http.MethodGet, "lol/status/v3/shard-data", nil)
 	if err != nil {
 		return nil, nil, err
 	}

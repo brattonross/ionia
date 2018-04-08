@@ -1,6 +1,7 @@
 package ionia
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -100,7 +101,7 @@ func NewClient(opts ...ClientOption) *Client {
 // NewRequest creates a new API request. A relative URL can be provided in urlStr,
 // in which case it is resolved to the BaseURL of the Client. Relative URLs should
 // always be specified with out a preceding slash.
-func (c *Client) NewRequest(urlStr string) (*http.Request, error) {
+func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
 	if !strings.HasSuffix(c.BaseURL.Path, "/") {
 		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
 	}
@@ -110,11 +111,25 @@ func (c *Client) NewRequest(urlStr string) (*http.Request, error) {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("GET", url.String(), nil)
+	var buf io.ReadWriter
+	if body != nil {
+		buf = new(bytes.Buffer)
+		enc := json.NewEncoder(buf)
+		enc.SetEscapeHTML(false)
+		err := enc.Encode(body)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	req, err := http.NewRequest(method, url.String(), buf)
 	if err != nil {
 		return nil, err
 	}
 
+	if body != nil {
+		req.Header.Set("Content-Type", "application/json")
+	}
 	req.Header.Set(headerRiotToken, c.apiKey)
 
 	return req, nil
