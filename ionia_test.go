@@ -151,10 +151,10 @@ func TestParseLimits(t *testing.T) {
 			name:   "Riot Limits Example",
 			limits: "100:1,1000:10,60000:600,360000:3600",
 			expected: map[int]Limit{
-				1:    Limit{100, 1},
-				10:   Limit{1000, 10},
-				600:  Limit{60000, 600},
-				3600: Limit{360000, 3600},
+				1:    {100, 1},
+				10:   {1000, 10},
+				600:  {60000, 600},
+				3600: {360000, 3600},
 			},
 		},
 	}
@@ -178,10 +178,10 @@ func TestParseCounts(t *testing.T) {
 			name:   "Riot Counts Example",
 			counts: "1:1,1:10,1:600,1:3600",
 			expected: map[int]Count{
-				1:    Count{1, 1},
-				10:   Count{1, 10},
-				600:  Count{1, 600},
-				3600: Count{1, 3600},
+				1:    {1, 1},
+				10:   {1, 10},
+				600:  {1, 600},
+				3600: {1, 3600},
 			},
 		},
 	}
@@ -253,20 +253,20 @@ func TestCheckRateLimit(t *testing.T) {
 	c := NewClient()
 
 	c.rateLimits = map[string]Rate{
-		"okay": Rate{
+		"okay": {
 			Counts: map[int]Count{
-				1: Count{9, 1},
+				1: {9, 1},
 			},
 			Limits: map[int]Limit{
-				1: Limit{10, 1},
+				1: {10, 1},
 			},
 		},
-		"error": Rate{
+		"error": {
 			Counts: map[int]Count{
-				1: Count{10, 1},
+				1: {10, 1},
 			},
 			Limits: map[int]Limit{
-				1: Limit{10, 1},
+				1: {10, 1},
 			},
 		},
 	}

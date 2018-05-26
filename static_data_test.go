@@ -201,13 +201,13 @@ var (
 		Type:    "champion",
 		Version: "8.6.1",
 		Data: map[string]StaticChampionDTO{
-			"MonkeyKing": StaticChampionDTO{
+			"MonkeyKing": {
 				Title: "the Monkey King",
 				ID:    62,
 				Key:   "MonkeyKing",
 				Name:  "Wukong",
 			},
-			"Jax": StaticChampionDTO{
+			"Jax": {
 				Title: "Grandmaster at Arms",
 				ID:    24,
 				Key:   "Jax",
@@ -249,7 +249,7 @@ var (
 		Type:    "champion",
 		Version: "8.6.0",
 		Data: map[string]StaticChampionDTO{
-			"MonkeyKing": StaticChampionDTO{
+			"MonkeyKing": {
 				Name:  "Wukong",
 				Title: "the Monkey King",
 				AllyTips: []string{
@@ -260,7 +260,7 @@ var (
 				ID:    62,
 				Blurb: "Wukong is a vastayan trickster who uses his strength, agility, and intelligence to confuse his opponents and gain the upper hand. After finding a lifelong friend in the warrior known as Master Yi, Wukong became the last student of the ancient martial...",
 			},
-			"Jax": StaticChampionDTO{
+			"Jax": {
 				Name:  "Jax",
 				Title: "Grandmaster at Arms",
 				AllyTips: []string{
@@ -317,19 +317,19 @@ var (
 		Type:    "item",
 		Version: "8.7.1",
 		Data: map[string]ItemDTO{
-			"1001": ItemDTO{
+			"1001": {
 				PlainText:   "Slightly increases Movement Speed",
 				Description: "<groupLimit>Limited to 1 pair of boots.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +25 Movement Speed",
 				ID:          1001,
 				Name:        "Boots of Speed",
 			},
-			"1004": ItemDTO{
+			"1004": {
 				PlainText:   "Slightly increases Mana Regen",
 				Description: "<stats><mana>+25% Base Mana Regen </mana></stats>",
 				ID:          1004,
 				Name:        "Faerie Charm",
 			},
-			"1006": ItemDTO{
+			"1006": {
 				PlainText:   "Slightly increases Health Regen",
 				Description: "<stats>+50% Base Health Regen </stats>",
 				ID:          1006,
@@ -463,7 +463,7 @@ var (
 
 	wantMaps = &MapDataDTO{
 		Data: map[string]MapDetailsDTO{
-			"10": MapDetailsDTO{
+			"10": {
 				MapName: "The Twisted Treeline",
 				Image: ImageDTO{
 					Full:   "map10.png",
@@ -476,7 +476,7 @@ var (
 				},
 				MapID: 10,
 			},
-			"11": MapDetailsDTO{
+			"11": {
 				MapName: "Summoner's Rift",
 				Image: ImageDTO{
 					Full:   "map11.png",
@@ -525,7 +525,7 @@ var (
 		Type:    "mastery",
 		Version: "7.23.1",
 		Data: map[string]MasteryDTO{
-			"6111": MasteryDTO{
+			"6111": {
 				Description: []string{
 					"+0.8% Attack Speed",
 					"+1.6% Attack Speed",
@@ -536,7 +536,7 @@ var (
 				ID:   6111,
 				Name: "Fury",
 			},
-			"6114": MasteryDTO{
+			"6114": {
 				Description: []string{
 					"+0.4% increased Ability damage",
 					"+0.8% increased Ability damage",

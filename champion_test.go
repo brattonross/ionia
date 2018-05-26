@@ -66,7 +66,7 @@ var (
 
 	wantChampions = &ChampionListDTO{
 		Champions: []ChampionDTO{
-			ChampionDTO{
+			{
 				RankedPlayEnabled: true,
 				BotEnabled:        true,
 				BotMmEnabled:      true,
@@ -74,7 +74,7 @@ var (
 				FreeToPlay:        false,
 				ID:                123,
 			},
-			ChampionDTO{
+			{
 				RankedPlayEnabled: false,
 				BotEnabled:        false,
 				BotMmEnabled:      false,

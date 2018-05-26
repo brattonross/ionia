@@ -151,7 +151,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 
 // Do sends an API request and returns the API response. The API response is
 // decoded and stored in the value pointed to by v, or returned as an error
-// if an API error has occured.
+// if an API error has occurred.
 func (c *Client) Do(req *http.Request, v interface{}) (*http.Response, error) {
 	rateMethod := getMethod(req.URL.Path)
 	if errResp := c.checkRateLimit(req, rateMethod); errResp != nil {
