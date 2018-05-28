@@ -20,7 +20,7 @@ const (
 	// Default base URL for the Riot API.
 	// Must be formatted with a valid region string in order to be used in requests.
 	defaultBaseURL = "https://%s.api.riotgames.com/"
-	defaultRegion  = "na"
+	defaultRegion  = "na1"
 
 	headerRiotToken            = "X-Riot-Token"
 	headerRateLimitType        = "X-Rate-Limit-Type"
