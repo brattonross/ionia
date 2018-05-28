@@ -12,6 +12,7 @@ Credit for many of the techniques used in this library goes to the go-github tea
 ionia is still a work in progress.
 Things still to do:
 
+* Regional proxies
 * Write tests for remaining services
 * Add better descriptions to many data types and functions
 * Possibly add Riot-defined constants (e.g. region IDs)
