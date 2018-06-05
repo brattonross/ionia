@@ -72,7 +72,7 @@ func TestNewRequest_ErrorForNoTrailingSlash(t *testing.T) {
 		{rawurl: "https://example.com/test", wantError: true},
 		{rawurl: "https://example.com/test/", wantError: false},
 	}
-	c := NewClient()
+	c := NewClient("")
 	for _, tc := range tt {
 		u, err := url.Parse(tc.rawurl)
 		if err != nil {
@@ -241,7 +241,7 @@ func TestGetMethod(t *testing.T) {
 }
 
 func TestCheckRateLimit(t *testing.T) {
-	c := NewClient()
+	c := NewClient("")
 
 	c.rateLimits = map[string]Rate{
 		"okay": {
