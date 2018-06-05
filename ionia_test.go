@@ -52,7 +52,7 @@ func TestWithRegion(t *testing.T) {
 
 func TestNewRequest(t *testing.T) {
 	apiKey := "testing"
-	c := NewClient("")
+	c := NewClient(apiKey)
 
 	req, err := c.NewRequest(http.MethodGet, "https://example.com/test/", nil)
 	if err != nil {
