@@ -33,26 +33,17 @@ func createTestServer() (client *Client, mux *http.ServeMux, serverURL string, t
 
 	server := httptest.NewServer(apiHandler)
 
-	client = NewClient()
+	client = NewClient("")
 	url, _ := url.Parse(server.URL + baseURLPath + "/")
 	client.BaseURL = url
 
 	return client, mux, server.URL, server.Close
 }
 
-func TestWithAPIKey(t *testing.T) {
-	key := "testkey123"
-	client := NewClient(WithAPIKey(key))
-
-	if key != client.apiKey {
-		t.Errorf("expected client.apiKey to be %s, got %s", key, client.apiKey)
-	}
-}
-
 func TestWithRegion(t *testing.T) {
 	region := "test"
 	expected := fmt.Sprintf(defaultBaseURL, region)
-	client := NewClient(WithRegion(region))
+	client := NewClient("", WithRegion(region))
 
 	if expected != client.BaseURL.String() {
 		t.Errorf("expected url: %s, got: %s", expected, client.BaseURL.String())
@@ -61,7 +52,7 @@ func TestWithRegion(t *testing.T) {
 
 func TestNewRequest(t *testing.T) {
 	apiKey := "testing"
-	c := NewClient(WithAPIKey(apiKey))
+	c := NewClient("")
 
 	req, err := c.NewRequest(http.MethodGet, "https://example.com/test/", nil)
 	if err != nil {

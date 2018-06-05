@@ -67,13 +67,6 @@ type service struct {
 // ClientOption is a function which modifies the ionia client.
 type ClientOption func(*Client)
 
-// WithAPIKey returns a ClientOption which sets the Client's API key.
-func WithAPIKey(key string) ClientOption {
-	return func(c *Client) {
-		c.apiKey = key
-	}
-}
-
 // WithRegion returns a ClientOption which sets the Client's region to the given value.
 func WithRegion(region string) ClientOption {
 	return func(c *Client) {
@@ -84,10 +77,11 @@ func WithRegion(region string) ClientOption {
 // NewClient creates a new Riot API client.
 // Any number of ClientOptions can be passed, and will
 // be applied after the default client has been created.
-func NewClient(opts ...ClientOption) *Client {
+func NewClient(riotToken string, opts ...ClientOption) *Client {
 	baseURL, _ := url.Parse(fmt.Sprintf(defaultBaseURL, defaultRegion))
 
 	c := &Client{
+		apiKey:     riotToken,
 		client:     http.DefaultClient,
 		BaseURL:    baseURL,
 		rateLimits: make(map[string]Rate),
